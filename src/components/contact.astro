@@ -40,11 +40,12 @@
           ></textarea>
           <button
             type="submit"
-            class="group relative px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-orange-500/50 active:scale-95"
+            id="submit-btn"
+            class="group relative px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-orange-500/50 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <span class="relative z-10 flex items-center justify-center gap-2">
-              Envoyer
-              <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <span id="btn-text">Envoyer</span>
+              <svg id="btn-icon" class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
               </svg>
             </span>
@@ -53,41 +54,70 @@
         </form>
         <div
           id="form-message"
-          class="hidden justify-center items-center mt-4 text-[var(--white)] text-lg"
+          class="hidden mt-4 p-4 rounded-lg text-center"
         >
-          ✅ Merci pour votre message !
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script type="module" is:inline>
-  // Configuration EmailJS
-  emailjs.init('FOeZRXJ0ALP39qZnC');
+<script is:inline src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script is:inline>
+  (function() {
+    function initEmailJS() {
+      if (typeof emailjs !== 'undefined') {
+        emailjs.init('FOeZRXJ0ALP39qZnC');
 
-  const form = document.getElementById('contact-form');
-  const formMessage = document.getElementById('form-message');
+        const form = document.getElementById('contact-form');
+        const formMessage = document.getElementById('form-message');
+        const submitBtn = document.getElementById('submit-btn');
+        const btnText = document.getElementById('btn-text');
+        const btnIcon = document.getElementById('btn-icon');
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
+        form?.addEventListener('submit', function(e) {
+          e.preventDefault();
 
-    // Envoyer l'email via EmailJS
-    emailjs.sendForm(
-      'service_o6x0sx7',
-      'template_go2a12w',
-      form
-    )
-    .then(() => {
-      form.reset();
-      form.style.display = 'none';
-      formMessage.classList.remove('hidden');
-      formMessage.classList.add('flex');
-    })
-    .catch((error) => {
-      console.error('Erreur:', error);
-      alert('Un problème est survenu lors de l\'envoi de votre message.');
-    });
-  });
+          submitBtn.disabled = true;
+          btnText.textContent = 'Envoi...';
+          btnIcon.style.display = 'none';
+
+          emailjs.sendForm('service_o6x0sx7', 'template_go2a12w', form)
+            .then(function(response) {
+              form.reset();
+              submitBtn.disabled = false;
+              btnText.textContent = 'Envoyer';
+              btnIcon.style.display = 'block';
+              
+              formMessage.className = 'mt-4 p-4 rounded-lg text-center bg-green-500/20 border border-green-500/30 text-green-400';
+              formMessage.innerHTML = '✅ Formulaire soumis ! Emerick vous répondra dans moins de 48 heures.';
+              formMessage.classList.remove('hidden');
+              
+              setTimeout(function() {
+                formMessage.classList.add('hidden');
+              }, 5000);
+            })
+            .catch(function(error) {
+              submitBtn.disabled = false;
+              btnText.textContent = 'Envoyer';
+              btnIcon.style.display = 'block';
+              
+              formMessage.className = 'mt-4 p-4 rounded-lg text-center bg-red-500/20 border border-red-500/30 text-red-400';
+              formMessage.innerHTML = '❌ Erreur: ' + (error.text || 'Veuillez réessayer.');
+              formMessage.classList.remove('hidden');
+              
+              setTimeout(function() {
+                formMessage.classList.add('hidden');
+              }, 5000);
+            });
+        });
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initEmailJS);
+    } else {
+      initEmailJS();
+    }
+  })();
 </script>
