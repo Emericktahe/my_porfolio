@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const CategoryIcons = {
   "Developpeur Web": (
@@ -60,7 +60,6 @@ const SkillsList = () => {
   };
 
   const toggleItem = (item: string) => {
-    console.log('Toggle clicked:', item);
     setOpenItem(openItem === item ? null : item);
   };
 

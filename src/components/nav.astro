@@ -87,6 +87,22 @@ const navItems: NavItem[] = [
 
   nav a.active span {
     color: white !important;
+    background: linear-gradient(135deg, #a476ff 25%, #eee5ff 50%, #a476ff 75%);
+    background-size: 400% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shine 3s linear infinite;
+  }
+
+  @keyframes shine {
+    0% {
+      background-position: 100% 50%;
+    }
+    30%,
+    70% {
+      background-position: 0% 50%;
+    }
   }
 
   @media (max-width: 767px) {
@@ -164,7 +180,8 @@ const navItems: NavItem[] = [
   document.addEventListener("DOMContentLoaded", () => {
     const sections = document.querySelectorAll("section[id]");
     const navLinks = document.querySelectorAll("nav a[href^='#']");
-    const observerOptions = { threshold: 0.6 };
+    const isMobile = window.innerWidth < 768;
+    const observerOptions = { threshold: isMobile ? 0.2 : 0.6 };
 
     const observerCallback = (entries) => {
       entries.forEach((entry) => {
