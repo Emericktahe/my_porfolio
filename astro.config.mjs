@@ -6,14 +6,10 @@ import react from "@astrojs/react";
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), react()],
-
   output: "static",
-
-  base: "/my_porfolio/", // 🔥 TRÈS IMPORTANT POUR QUE LES CSS/JS CHARGENT
-
-  // 👇 IMPORTANT POUR GITHUB PAGES
+  site: "https://emericktahe.github.io",
+  base: "/my_porfolio",
   outDir: "docs",
-
   vite: {
     resolve: {
       alias: {
@@ -22,11 +18,9 @@ export default defineConfig({
       },
     },
   },
-
   build: {
     inlineStylesheets: "auto",
   },
-
   server: {
     host: true,
     port: 4321,
