@@ -9,6 +9,8 @@ export default defineConfig({
 
   output: "static",
 
+  base: "/my_porfolio/", // 🔥 TRÈS IMPORTANT POUR QUE LES CSS/JS CHARGENT
+
   // 👇 IMPORTANT POUR GITHUB PAGES
   outDir: "docs",
 
