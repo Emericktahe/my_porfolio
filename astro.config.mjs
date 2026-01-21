@@ -8,7 +8,7 @@ export default defineConfig({
   integrations: [tailwind(), react()],
   output: "static",
   site: "https://emericktahe.github.io",
-  base: "/my_porfolio",
+  base: "/my_porfolio/",
   outDir: "docs",
   vite: {
     resolve: {
@@ -19,7 +19,8 @@ export default defineConfig({
     },
   },
   build: {
-    inlineStylesheets: "auto",
+    inlineStylesheets: "always",
+    assets: "_astro",
   },
   server: {
     host: true,
