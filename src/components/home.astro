@@ -1,7 +1,7 @@
 ---
 import LetterGlitch from "../React/LetterGlitch.tsx";
 import LogoWall from "../components/logoWall.astro";
-import SkillsList from "../React/SkillsList.tsx";
+import Competences from "../components/competences.astro";
 ---
 
 <section class="text-[var(--white)] mt-12 md:mt-0" id="home">
@@ -132,21 +132,7 @@ import SkillsList from "../React/SkillsList.tsx";
 
     <LogoWall />
 
-      <div class="flex flex-col lg:flex-row items-center gap-8">
-      <SkillsList client:visible />
-      <div
-        class="flex justify-center md:w-full md:h-[292px] size-[290px] pt-3 md:pt-9 md:ml-16"
-      >
-        <LetterGlitch
-          client:visible
-          glitchColors={["#5e4491", "#A476FF", "#241a38"]}
-          glitchSpeed={33}
-          centerVignette={false}
-          outerVignette={true}
-          smooth={true}
-        />
-      </div>
-    </div>
+    <Competences />
   </div>
 </section>
 

@@ -1,0 +1,55 @@
+---
+const competences = [
+  {
+    title: "Développement Web",
+    description: "Création d'applications web modernes, sites vitrine performants et portfolios interactifs avec React, Vue.js et Astro",
+    icon: "M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z",
+    gradient: "from-blue-500 to-purple-600"
+  },
+  {
+    title: "Développement Mobile",
+    description: "Applications mobiles cross-platform avec Flutter et React Native pour une expérience native",
+    icon: "M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99z",
+    gradient: "from-orange-500 to-red-600"
+  },
+  {
+    title: "Backend & Base de données",
+    description: "Développement d'APIs REST et GraphQL, gestion de bases de données avec PHP, Laravel et MySQL",
+    icon: "M20 13H4c-.55 0-1 .45-1 1v6c0 .55.45 1 1 1h16c.55 0 1-.45 1-1v-6c0-.55-.45-1-1-1z",
+    gradient: "from-green-500 to-emerald-600"
+  },
+  {
+    title: "UI/UX Design",
+    description: "Conception d'interfaces utilisateur modernes, prototypage interactif et création de design systems avec Figma",
+    icon: "M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8z",
+    gradient: "from-pink-500 to-rose-600"
+  }
+];
+---
+
+<section class="py-20" id="competences">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-lg text-[var(--sec)] mb-2 shiny-sec text-center">Mes Compétences</h2>
+    <h3 class="text-4xl md:text-5xl font-bold text-center mb-16 text-[var(--white)]">
+      Domaines d'expertise
+    </h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {competences.map((comp) => (
+        <div class="group relative bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] rounded-3xl p-6 border border-[#ffffff08] hover:border-[#ffffff15] transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/10">
+          <div class="flex items-start gap-4">
+            <div class={`w-12 h-12 bg-gradient-to-r ${comp.gradient} rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
+              <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d={comp.icon}/>
+              </svg>
+            </div>
+            <div>
+              <h4 class="text-xl font-bold text-white mb-2">{comp.title}</h4>
+              <p class="text-sm text-[var(--white-icon)] leading-relaxed">{comp.description}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
